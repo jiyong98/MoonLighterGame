@@ -6,12 +6,15 @@ from missile import Missile
 import random
 
 class Hp:
+    image = None
     image1 = None
     image2 = None
     image3 = None
     image4 = None
 
     def __init__(self, x = 0, y = 0):
+        if Hp.image == None:
+            Hp.image = load_image('playerHp.png')
         if Hp.image1 == None:
             Hp.image1 = load_image('hp100.png')
 
@@ -23,7 +26,7 @@ class Hp:
 
         if Hp.image4 == None:
             Hp.image4 = load_image('hp25.png')
-        self.x, self.y = 250, 400
+        self.x, self.y = 150, 750
         self.x2, self.y2 = 500, 400
         self.x3, self.y3 = x, y
         self.x4, self.y4 = x, y
@@ -34,7 +37,9 @@ class Hp:
         missile = Missile()
 
     def draw(self):
-        pass
+        self.image.draw(self.x, self.y)
+
+
 
 
 
