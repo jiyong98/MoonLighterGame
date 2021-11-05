@@ -1,65 +1,85 @@
-import random
 from pico2d import *
+
+import MoonLighter_FrameWork
 import MoonLighter_world
+from player import Player
 
-from player2 import Player
 
-player2 = None
-global count
-count = 0
+import random
+player = None
 
-def collide(self, b):
-    # fill here
-    left_a, bottom_a, right_a, top_a = self.get_bb()
-    left_b, bottom_b, right_b, top_b = b.get_bb()
-
-    # 벗어나면 False 충돌하면 true
-    if left_a > right_b: return False
-    if right_a < left_b: return False
-    if top_a < bottom_b: return False
-    if bottom_a > top_b: return False
-
-    return True
 class Eball:
     image = None
     isEnermy1 = True
-
+    eBall2image2 = None
+    eBall2image3 = None
+    run2 = False
+    isplayer = True
+    FirstEball = True
     count = 0
     count2 = 0
-    def __init__(self, x = 0, y = 0, velocity = 1):
-        if Eball.image == None:
-            Eball.image = load_image('eBall2.png')
-        self.x, self.y, self.velocity = x, y, velocity
+    def __init__(self):
+        if Eball.eBall2image2 == None:
+            Eball.eBall2image2 = load_image('eBall2.png')
+        if Eball.eBall2image3 == None:
+            Eball.eBall2image3 = load_image('eBall2Up.png')
         self.font = load_font('ENCR10B.TTF', 16)
 
-        global player2
-        player2 = Player()
+        self.x2, self.y2 = 320, 750
+        self.x3, self.y3 = 960, 750
+        self.x4, self.y4 = 320, 50
+        self.x5, self.y5 = 960, 50
 
+        self.speed = 500
+        self.font = load_font('ENCR10B.TTF', 16)
+        self.Hp = 100
 
+        global player
+        player = Player()
 
     def get_bb(self):
-        # fill here
-        return self.x - 5, self.y - 15, self.x + 5, self.y + 15
+        return self.x2 - 20, self.y2 - 30, self.x2 + 20, self.y2 + 30
+
+    #def get_bb2(self):
+        #return self.Bx3 - 20, self.By3 - 30, self.Bx3 + 20, self.By3 + 30
+
+    #def get_bb3(self):
+        #return self.Bx4 - 20, self.By4 - 30, self.Bx4 + 20, self.By4 + 30
+
+    #def get_bb4(self):
+        #return self.Bx5 - 20, self.By5 - 30, self.Bx5 + 20, self.By5 + 30
+
 
     def draw(self):
-        self.image.draw(self.x, self.y)
-        self.font.draw(self.x - 60, self.y + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
-        # fill here
+        self.eBall2image2.draw(self.x2, self.y2)
+        #self.eBall2image2.draw(self.Bx3, self.By3)
+        #self.eBall2image3.draw(self.Bx4, self.By4)
+        #self.eBall2image3.draw(self.Bx5, self.By5)
+
+        self.font.draw(self.x2 - 10, self.y2 + 50, '(Time: %3.2f)' % get_time(), (255, 0, 255))
+        #self.font.draw(self.Bx3 - 10, self.By3 + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
+        #self.font.draw(self.Bx4 - 10, self.By4 + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
+        #self.font.draw(self.Bx5 - 10, self.By5 + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
+
         draw_rectangle(*self.get_bb())
+        #draw_rectangle(*self.get_bb2())
+        #draw_rectangle(*self.get_bb3())
+        #draw_rectangle(*self.get_bb4())
 
     def update(self):
-        self.y += self.velocity
+        self.y2 -= self.speed * MoonLighter_FrameWork.frame_time
+        #self.By3 -= self.speed * MoonLighter_FrameWork.frame_time
+        #self.By4 += self.speed * MoonLighter_FrameWork.frame_time
+        #self.By5 += self.speed * MoonLighter_FrameWork.frame_time
 
-        if Eball.isEnermy1:
-            if collide(self, player2):
-                Eball.count = Eball.count + 1
+        if Eball.FirstEball:
+            if collide(self, player):
+                # Enermy2.playerLife = Enermy2.playerLife + 1
+                print('충돌')
                 MoonLighter_world.remove_object(self)
-            if Eball.count >= 4:
-                Eball.remove(player2)
-                Eball.isEnermy1 = False
 
 
-
-        if self.y < 25 or self.y > 1000 - 25:
-            MoonLighter_world.remove_object(self)
-
+        if self.y2 < 0:
+            Eball.__init__(self)
+            Eball.draw(self)
+            Eball.update(self)

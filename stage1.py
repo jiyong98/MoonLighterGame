@@ -7,7 +7,8 @@ from pico2d import *
 import MoonLighter_FrameWork
 from player import Player
 
-from missile import Missile
+from eBall import Eball
+#from missile import Missile
 from hp import Hp
 
 from enermy1 import Enermy2
@@ -18,10 +19,11 @@ WINDOW_HEIGHT = 800
 
 name = "stage1"
 
-players = None
+
 boss = None
 hp = None
 font = None
+eBalls = []
 
 
 #enermy1s = None
@@ -54,6 +56,9 @@ def enter():
     hp = Hp()
     MoonLighter_world.add_object(hp, 1)
 
+    global eBalls
+    eBalls = [Eball() for i in range(4)]
+    MoonLighter_world.add_objects(eBalls, 1)
     #global enermy1s
     #enermy1s = Enermy()
     #MoonLighter_world.add_object(enermy1s, 1)
@@ -62,9 +67,9 @@ def enter():
     enermy2s = Enermy2()
     MoonLighter_world.add_object(enermy2s, 1)
 
-    global missiles
-    missiles = Missile()
-    MoonLighter_world.add_object(missiles, 1)
+    #global missiles
+    #missiles = Missile()
+    #MoonLighter_world.add_object(missiles, 1)
     pass
 
 def exit():
@@ -98,6 +103,10 @@ def handle_events():
 def update():
     for MoonLighter_object in MoonLighter_world.all_objects():
         MoonLighter_object.update()
+    for ball in eBalls:
+        if collide(players, ball):
+            print("충돌")
+
 
     pass
 

@@ -2,7 +2,7 @@ from pico2d import *
 
 import MoonLighter_FrameWork
 import MoonLighter_world
-from missile import Missile
+#from missile import Missile
 import random
 
 class Hp:
@@ -33,17 +33,10 @@ class Hp:
         self.Hp = 100
         self.font = load_font('ENCR10B.TTF', 16)
 
-        global missile
-        missile = Missile()
+
 
     def draw(self):
         self.image.draw(self.x, self.y)
-
-
-
-
-
-
 
         # self.font.draw(self.x - 60, self.y + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
 

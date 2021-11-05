@@ -1,6 +1,7 @@
 from pico2d import *
 import MoonLighter_world
 import MoonLighter_FrameWork
+#from missile import Missile
 
 def collide(a, b):
     # fill here
@@ -36,14 +37,14 @@ class Player:
     hpimage4 = None
     run2 = False
     count2 = 0
-
     def __init__(self):
-        self.x, self.y = 90, 800 // 2
+        self.x, self.y = 90, 800//2
         self.image = load_image('charecter_anim.png')
         self.dx, self.dy = 0, 0
         self.frame = 0
         self.dir = 1
         self.radi = 700
+        self.font = load_font('ENCR10B.TTF', 16)
 
         if Player.hpimage1 == None:
             Player.hpimage1 = load_image('hp100.png')
@@ -64,9 +65,9 @@ class Player:
     def remove2(self):
         Player.run2 = True
 
-    def fire_Missile(self):
-        missile = Missile(self.x, self.y, self.dir * 3)
-        MoonLighter_world.add_object(missile, 1)
+    #def fire_Missile(self):
+        #missile = Missile(self.x, self.y, self.dir * 3)
+        #MoonLighter_world.add_object(missile, 1)
 
     def update(self):
         self.x += self.dx
@@ -89,6 +90,11 @@ class Player:
         elif Player.Left:
             self.image.clip_draw(self.frame * 100, 100, 100, 100, self.x, self.y)
 
+        self.font.draw(self.x - 50, self.y + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
+
+        draw_rectangle(*self.get_bb())
+
+
     def handle_event(self, event):
         if event.type == SDL_QUIT:
             MoonLighter_FrameWork.quit()
@@ -109,8 +115,8 @@ class Player:
                 self.dy -= 1
                 self.radi = 600
                 Player.Down = True
-            elif event.key == SDLK_SPACE:
-                self.fire_Missile()
+            #elif event.key == SDLK_a:
+                #self.fire_Missile()
             elif event.key == SDLK_ESCAPE:
                 MoonLighter_FrameWork.quit()
         elif event.type == SDL_KEYUP:

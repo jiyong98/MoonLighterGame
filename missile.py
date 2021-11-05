@@ -2,7 +2,7 @@ import random
 from pico2d import *
 import MoonLighter_world
 from enermy1 import Enermy2
-from enermy import Enermy
+
 from player2 import Player
 
 enermy1 = None
@@ -11,18 +11,7 @@ players = None
 global count
 count = 0
 
-def collide(self, b):
-    # fill here
-    left_a, bottom_a, right_a, top_a = self.get_bb()
-    left_b, bottom_b, right_b, top_b = b.get_bb()
 
-    # 벗어나면 False 충돌하면 true
-    if left_a > right_b: return False
-    if right_a < left_b: return False
-    if top_a < bottom_b: return False
-    if bottom_a > top_b: return False
-
-    return True
 class Missile:
     image = None
     isEnermy1 = True
@@ -36,8 +25,8 @@ class Missile:
             Missile.image = load_image('missile.png')
         self.x, self.y, self.velocity = x, y, velocity
         self.font = load_font('ENCR10B.TTF', 16)
-        global enermy1
-        enermy1 = Enermy()
+        #global enermy1
+        #enermy1 = Enermy()
 
         global enermy2
         enermy2 = Enermy2()
@@ -69,21 +58,15 @@ class Missile:
             self.y -= self.velocity
 
 
-        if Missile.isEnermy1:
-            if collide(self, enermy1):
-                Missile.count = Missile.count + 1
-                MoonLighter_world.remove_object(self)
-            if Missile.count >= 4:
-                Enermy.remove(enermy1)
-                Missile.isEnermy1 = False
 
-        if Missile.isEnermy2:
-            if collide(self, enermy2):
-                Missile.count2 = Missile.count2 + 1
-                MoonLighter_world.remove_object(self)
-            if Missile.count2 >= 4:
-                Enermy2.remove2(enermy2)
-                Missile.isEnermy2 = False
+
+       # if Missile.isEnermy2:
+           # if collide(self, enermy2):
+             #   Missile.count2 = Missile.count2 + 1
+             #   MoonLighter_world.remove_object(self)
+           # if Missile.count2 >= 4:
+             #   Enermy2.remove2(enermy2)
+              #  Missile.isEnermy2 = False
 
 
 
