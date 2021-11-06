@@ -7,7 +7,7 @@ from pico2d import *
 import MoonLighter_FrameWork
 from player import Player
 
-from eBall import Eball
+from eBall import Eball, Eball2, Eball3, Eball4
 #from missile import Missile
 from hp import Hp
 
@@ -24,6 +24,7 @@ boss = None
 hp = None
 font = None
 eBalls = []
+eBalls2 = []
 
 
 #enermy1s = None
@@ -57,8 +58,22 @@ def enter():
     MoonLighter_world.add_object(hp, 1)
 
     global eBalls
-    eBalls = [Eball() for i in range(4)]
+    eBalls = [Eball() for i in range(1)]
     MoonLighter_world.add_objects(eBalls, 1)
+
+    global eBalls2
+    eBalls2 = [Eball2() for i in range(1)]
+    MoonLighter_world.add_objects(eBalls2, 1)
+
+    global eBalls3
+    eBalls3 = [Eball3() for i in range(1)]
+    MoonLighter_world.add_objects(eBalls3, 1)
+
+    global eBalls4
+    eBalls4 = [Eball4() for i in range(1)]
+    MoonLighter_world.add_objects(eBalls4, 1)
+
+
     #global enermy1s
     #enermy1s = Enermy()
     #MoonLighter_world.add_object(enermy1s, 1)
@@ -105,6 +120,23 @@ def update():
         MoonLighter_object.update()
     for ball in eBalls:
         if collide(players, ball):
+            eBalls.remove(ball)
+            MoonLighter_world.remove_object(ball)
+            print("충돌")
+    for ball2 in eBalls2:
+        if collide(players, ball2):
+            eBalls2.remove(ball2)
+            MoonLighter_world.remove_object(ball2)
+            print("충돌")
+    for ball3 in eBalls3:
+        if collide(players, ball3):
+            eBalls3.remove(ball3)
+            MoonLighter_world.remove_object(ball3)
+            print("충돌")
+    for ball4 in eBalls4:
+        if collide(players, ball4):
+            eBalls4.remove(ball4)
+            MoonLighter_world.remove_object(ball4)
             print("충돌")
 
 
