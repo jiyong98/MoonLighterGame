@@ -10,7 +10,7 @@ from player import Player
 from missile import Missile
 from hp import Hp
 
-from enermy import Enermy
+from slame import Enermy
 import MoonLighter_world
 
 WINDOW_WIDTH = 1280
@@ -18,13 +18,13 @@ WINDOW_HEIGHT = 800
 
 name = "stage2"
 
-players = None
+
 boss = None
 hp = None
 font = None
 
 
-enermy1s = []
+enermys = []
 
 missiles = None
 image = None
@@ -54,9 +54,9 @@ def enter():
     hp = Hp()
     MoonLighter_world.add_object(hp, 1)
 
-    global enermy1s
-    enermy1s = [Enermy()] * 6
-    MoonLighter_world.add_objects(enermy1s, 1)
+    global enermys
+    enermys = [Enermy() for i in range(6)]
+    MoonLighter_world.add_objects(enermys, 1)
 
 
     global missiles
@@ -93,7 +93,11 @@ def handle_events():
 def update():
     for MoonLighter_object in MoonLighter_world.all_objects():
         MoonLighter_object.update()
-
+    for slame in enermys:
+        if collide(players, slame):
+            enermys.remove(slame)
+            MoonLighter_world.remove_object(slame)
+            print("충돌")
     pass
 
 

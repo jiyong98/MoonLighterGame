@@ -130,8 +130,6 @@ class Eball3:
         self.eBall2image3.draw(self.x4, self.y4)
 
         self.font.draw(self.x4 - 10, self.y4 + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
-
-
         draw_rectangle(*self.get_bb())
 
 

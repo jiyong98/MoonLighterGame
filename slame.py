@@ -49,8 +49,8 @@ class Enermy:
         #self.image.draw(self.x + 100, self.y - 200)
         #Enermy.hpimage1.draw(self.Bx + 100, self.By - 150)
 
-        # self.font.draw(self.x2 - 60, self.y2 + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
-        #draw_rectangle(*self.get_bb())
+        self.font.draw(self.x - 60, self.y + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
+        draw_rectangle(*self.get_bb())
 
     def remove(self):
         Enermy.run = True
