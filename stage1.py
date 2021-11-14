@@ -5,10 +5,10 @@ import os
 from pico2d import *
 
 import MoonLighter_FrameWork
-from player import Player
+from player2 import Player
 
 from eBall import Eball, Eball2, Eball3, Eball4
-#from missile import Missile
+from missile import Missile
 from hp import Hp
 
 from enermy1 import Enermy2
@@ -74,17 +74,9 @@ def enter():
     MoonLighter_world.add_objects(eBalls4, 1)
 
 
-    #global enermy1s
-    #enermy1s = Enermy()
-    #MoonLighter_world.add_object(enermy1s, 1)
-
-    global enermy2s
-    enermy2s = Enermy2()
-    MoonLighter_world.add_object(enermy2s, 1)
-
-    #global missiles
-    #missiles = Missile()
-    #MoonLighter_world.add_object(missiles, 1)
+    global missiles
+    missiles = Missile()
+    MoonLighter_world.add_object(missiles, 1)
     pass
 
 def exit():

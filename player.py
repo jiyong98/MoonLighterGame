@@ -1,7 +1,7 @@
 from pico2d import *
 import MoonLighter_world
 import MoonLighter_FrameWork
-#from missile import Missile
+from missile import Missile
 
 def collide(a, b):
     # fill here
@@ -65,9 +65,9 @@ class Player:
     def remove2(self):
         Player.run2 = True
 
-    #def fire_Missile(self):
-        #missile = Missile(self.x, self.y, self.dir * 3)
-        #MoonLighter_world.add_object(missile, 1)
+    def fire_Missile(self):
+        missile = Missile(self.x, self.y, self.dir * 3)
+        MoonLighter_world.add_object(missile, 1)
 
     def update(self):
         self.x += self.dx
@@ -115,8 +115,8 @@ class Player:
                 self.dy -= 1
                 self.radi = 600
                 Player.Down = True
-            #elif event.key == SDLK_a:
-                #self.fire_Missile()
+            elif event.key == SDLK_a:
+                self.fire_Missile()
             elif event.key == SDLK_ESCAPE:
                 MoonLighter_FrameWork.quit()
         elif event.type == SDL_KEYUP:

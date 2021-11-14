@@ -7,7 +7,7 @@ from pico2d import *
 import MoonLighter_FrameWork
 from player import Player
 
-from missile import Missile
+from missile2 import Missile
 from hp import Hp
 
 from slame import Enermy
@@ -24,9 +24,9 @@ hp = None
 font = None
 
 
-enermys = []
+#enermys = []
 
-missiles = None
+
 image = None
 
 
@@ -55,8 +55,10 @@ def enter():
     MoonLighter_world.add_object(hp, 1)
 
     global enermys
-    enermys = [Enermy() for i in range(6)]
-    MoonLighter_world.add_objects(enermys, 1)
+    #enermys = [Enermy() for i in range(6)]
+    enermys = Enermy()
+    MoonLighter_world.add_object(enermys, 1)
+    #MoonLighter_world.add_objects(enermys, 1)
 
 
     global missiles
@@ -93,11 +95,16 @@ def handle_events():
 def update():
     for MoonLighter_object in MoonLighter_world.all_objects():
         MoonLighter_object.update()
-    for slame in enermys:
-        if collide(players, slame):
-            enermys.remove(slame)
-            MoonLighter_world.remove_object(slame)
-            print("충돌")
+
+
+
+
+    #for ball in eBalls:
+     #   if collide(players, ball):
+      #      eBalls.remove(ball)
+       #     MoonLighter_world.remove_object(ball)
+        #    print("충돌")
+
     pass
 
 

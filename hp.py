@@ -2,7 +2,7 @@ from pico2d import *
 
 import MoonLighter_FrameWork
 import MoonLighter_world
-#from missile import Missile
+from missile import Missile
 import random
 
 class Hp:
@@ -30,14 +30,20 @@ class Hp:
         self.x2, self.y2 = 500, 400
         self.x3, self.y3 = x, y
         self.x4, self.y4 = x, y
+
+        self.Bx, self.By = 500, 800
         self.Hp = 100
         self.font = load_font('ENCR10B.TTF', 16)
-
+        global missile
+        missile = Missile()
 
 
     def draw(self):
         self.image.draw(self.x, self.y)
-
+        if missile.count == 0:
+            Hp.image1.draw(self.Bx, self.By + 50)
+        elif missile.count == 1:
+            Hp.image3.draw(self.Bx, self.By + 50)
         # self.font.draw(self.x - 60, self.y + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
 
     def remove(self):
