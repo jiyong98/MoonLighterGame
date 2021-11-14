@@ -7,10 +7,10 @@ from pico2d import *
 import MoonLighter_FrameWork
 from player import Player
 
-from missile2 import Missile
+from missile import Missile
 from hp import Hp
 
-from slame import Enermy
+from slame import Enermy,Enermy2,Enermy3,Enermy4,Enermy5,Enermy6
 import MoonLighter_world
 
 WINDOW_WIDTH = 1280
@@ -59,6 +59,30 @@ def enter():
     enermys = Enermy()
     MoonLighter_world.add_object(enermys, 1)
     #MoonLighter_world.add_objects(enermys, 1)
+    global enermys2
+    # enermys = [Enermy() for i in range(6)]
+    enermys2 = Enermy2()
+    MoonLighter_world.add_object(enermys2, 1)
+
+    global enermys3
+    # enermys = [Enermy() for i in range(6)]
+    enermys3 = Enermy3()
+    MoonLighter_world.add_object(enermys3, 1)
+
+    global enermys4
+    # enermys = [Enermy() for i in range(6)]
+    enermys4 = Enermy4()
+    MoonLighter_world.add_object(enermys4, 1)
+
+    global enermys5
+    # enermys = [Enermy() for i in range(6)]
+    enermys5 = Enermy5()
+    MoonLighter_world.add_object(enermys5, 1)
+
+    global enermys6
+    # enermys = [Enermy() for i in range(6)]
+    enermys6 = Enermy6()
+    MoonLighter_world.add_object(enermys6, 1)
 
 
     global missiles

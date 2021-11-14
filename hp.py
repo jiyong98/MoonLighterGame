@@ -40,10 +40,7 @@ class Hp:
 
     def draw(self):
         self.image.draw(self.x, self.y)
-        if missile.count == 0:
-            Hp.image1.draw(self.Bx, self.By + 50)
-        elif missile.count == 1:
-            Hp.image3.draw(self.Bx, self.By + 50)
+
         # self.font.draw(self.x - 60, self.y + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
 
     def remove(self):

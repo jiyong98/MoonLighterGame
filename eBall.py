@@ -41,12 +41,6 @@ class Eball:
         self.eBall2image2.draw(self.x2, self.y2)
 
 
-        self.font.draw(self.x2 - 10, self.y2 + 50, '(Time: %3.2f)' % get_time(), (255, 0, 255))
-
-
-        draw_rectangle(*self.get_bb())
-
-
     def update(self):
         self.y2 -= self.speed * MoonLighter_FrameWork.frame_time
 
@@ -88,11 +82,6 @@ class Eball2:
     def draw(self):
         self.eBall2image2.draw(self.x3, self.y3)
 
-        self.font.draw(self.x3 - 10, self.y3 + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
-
-
-        draw_rectangle(*self.get_bb())
-
 
     def update(self):
         self.y3 -= self.speed * MoonLighter_FrameWork.frame_time
@@ -129,8 +118,8 @@ class Eball3:
     def draw(self):
         self.eBall2image3.draw(self.x4, self.y4)
 
-        self.font.draw(self.x4 - 10, self.y4 + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
-        draw_rectangle(*self.get_bb())
+        #self.font.draw(self.x4 - 10, self.y4 + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
+        #draw_rectangle(*self.get_bb())
 
 
     def update(self):
@@ -167,12 +156,6 @@ class Eball4:
 
     def draw(self):
         self.eBall2image3.draw(self.x5, self.y5)
-
-        self.font.draw(self.x5 - 10, self.y5 + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
-
-
-        draw_rectangle(*self.get_bb())
-
 
     def update(self):
         self.y5 += self.speed * MoonLighter_FrameWork.frame_time

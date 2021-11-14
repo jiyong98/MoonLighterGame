@@ -90,15 +90,17 @@ class Player:
         elif Player.Left:
             self.image.clip_draw(self.frame * 100, 100, 100, 100, self.x, self.y)
 
-        self.font.draw(self.x - 50, self.y + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
+        #self.font.draw(self.x - 50, self.y + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
 
-        draw_rectangle(*self.get_bb())
+        #draw_rectangle(*self.get_bb())
 
 
     def handle_event(self, event):
         if event.type == SDL_QUIT:
             MoonLighter_FrameWork.quit()
         elif event.type == SDL_KEYDOWN:
+            if event.key == SDLK_c:
+                Player.__init__(self)
             if event.key == SDLK_RIGHT:
                 self.dx += 1
                 self.radi = 700
