@@ -2,6 +2,7 @@ import random
 import json
 import os
 
+import stage3
 from pico2d import *
 
 import MoonLighter_FrameWork
@@ -110,6 +111,8 @@ def handle_events():
             MoonLighter_FrameWork.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             MoonLighter_FrameWork.quit()
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_SPACE:
+            MoonLighter_FrameWork.change_state(stage3)
         else:
             players.handle_event(event)
 
@@ -120,7 +123,10 @@ def update():
     for MoonLighter_object in MoonLighter_world.all_objects():
         MoonLighter_object.update()
 
-
+    if Missile.Total == 12:
+        Missile.isStage2 = False
+        Missile.isStage3 = True
+        MoonLighter_FrameWork.change_state(stage3)
 
 
     #for ball in eBalls:

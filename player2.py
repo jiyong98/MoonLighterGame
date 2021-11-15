@@ -3,6 +3,17 @@ import MoonLighter_world
 import MoonLighter_FrameWork
 #from missile import Missile
 
+PIXEL_PER_METER = (10.0 / 1.0) # 10픽셀 30센치
+RUN_SPEED_KMPH = 20.0 # km / Hour
+RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000 / 60.0)
+RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
+RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
+
+# Boy Action Speed
+# fill expressions correctly
+TIME_PER_ACTION = 0.5
+ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
+FRAMES_PER_ACTION = 8
 def collide(a, b):
     # fill here
     left_a, bottom_a, right_a, top_a = a.get_bb()
@@ -36,7 +47,10 @@ class Player:
     hpimage3 = None
     hpimage4 = None
     run2 = False
+    count = 0
     count2 = 0
+    count3 = 0
+    count4 = 0
     def __init__(self):
         self.x, self.y = 90, 800//2
         self.image = load_image('charecter_anim.png')
@@ -72,7 +86,8 @@ class Player:
     def update(self):
         self.x += self.dx
         self.y += self.dy
-        self.frame = (self.frame + 1) % 4
+        #self.frame = (self.frame + 1) % 4
+        self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * MoonLighter_FrameWork.frame_time) % 4
         if self.x > 1265 or self.x < 50 or self.y > 875 or self.y < 50:
             self.x -= self.dx
             self.y -= self.dy
@@ -90,29 +105,31 @@ class Player:
         elif Player.Left:
             self.image.clip_draw(self.frame * 100, 100, 100, 100, self.x, self.y)
 
-        self.font.draw(self.x - 50, self.y + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
+        #self.font.draw(self.x - 50, self.y + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
 
-        draw_rectangle(*self.get_bb())
+        #draw_rectangle(*self.get_bb())
 
 
     def handle_event(self, event):
         if event.type == SDL_QUIT:
             MoonLighter_FrameWork.quit()
         elif event.type == SDL_KEYDOWN:
+            if event.key == SDLK_c:
+                Player.__init__(self)
             if event.key == SDLK_RIGHT:
-                self.dx += 1
+                self.dx += RUN_SPEED_PPS
                 self.radi = 700
                 Player.Right = True
             elif event.key == SDLK_LEFT:
-                self.dx -= 1
+                self.dx -= RUN_SPEED_PPS
                 self.radi = 400
                 Player.Left = True
             elif event.key == SDLK_UP:
-                self.dy += 1
+                self.dy += RUN_SPEED_PPS
                 self.radi = 500
                 Player.Up = True
             elif event.key == SDLK_DOWN:
-                self.dy -= 1
+                self.dy -= RUN_SPEED_PPS
                 self.radi = 600
                 Player.Down = True
             #elif event.key == SDLK_a:
@@ -121,19 +138,19 @@ class Player:
                 MoonLighter_FrameWork.quit()
         elif event.type == SDL_KEYUP:
             if event.key == SDLK_RIGHT:
-                self.dx -= 1
+                self.dx -= RUN_SPEED_PPS
                 self.radi = 700
                 Player.Right = False
             elif event.key == SDLK_LEFT:
-                self.dx += 1
+                self.dx += RUN_SPEED_PPS
                 self.radi = 400
                 Player.Left = False
             elif event.key == SDLK_UP:
-                self.dy -= 1
+                self.dy -= RUN_SPEED_PPS
                 self.radi = 500
                 Player.Up = False
             elif event.key == SDLK_DOWN:
-                self.dy += 1
+                self.dy += RUN_SPEED_PPS
                 self.radi = 600
                 Player.Down = False
 

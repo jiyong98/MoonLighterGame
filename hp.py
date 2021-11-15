@@ -6,15 +6,23 @@ from missile import Missile
 import random
 
 class Hp:
-    image = None
+    imageFir = None
+    imageSec = None
+    imageTre = None
+    count = 0
+
     image1 = None
     image2 = None
     image3 = None
     image4 = None
 
     def __init__(self, x = 0, y = 0):
-        if Hp.image == None:
-            Hp.image = load_image('playerHp.png')
+        if Hp.imageFir == None:
+            Hp.imageFir = load_image('playerHp.png')
+        if Hp.imageSec == None:
+            Hp.imageSec = load_image('playerHp2.png')
+        if Hp.imageTre == None:
+            Hp.imageTre = load_image('playerHp3.png')
         if Hp.image1 == None:
             Hp.image1 = load_image('hp100.png')
 
@@ -39,7 +47,12 @@ class Hp:
 
 
     def draw(self):
-        self.image.draw(self.x, self.y)
+        if Hp.count == 0:
+            self.imageFir.draw(self.x, self.y)
+        elif Hp.count == 1:
+            self.imageSec.draw(self.x, self.y)
+        elif Hp.count == 2:
+            self.imageTre.draw(self.x, self.y)
 
         # self.font.draw(self.x - 60, self.y + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
 

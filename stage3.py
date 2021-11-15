@@ -8,7 +8,8 @@ import MoonLighter_FrameWork
 from player import Player
 
 from eBall import Eball, Eball2, Eball3, Eball4
-from missile import Missile
+from boss import Boss
+#from missile import Missile
 from hp import Hp
 
 from enermy1 import Enermy2
@@ -17,7 +18,7 @@ import stage2
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 800
 
-name = "stage1"
+name = "stage3"
 
 
 boss = None
@@ -49,6 +50,9 @@ def enter():
     global image
     image = load_image('Stage1.png')
 
+    global boss
+    boss = Boss()
+    MoonLighter_world.add_object(boss, 1)
     global players
     players = Player()
     MoonLighter_world.add_object(players, 1)
@@ -104,9 +108,7 @@ def handle_events():
             MoonLighter_FrameWork.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             MoonLighter_FrameWork.quit()
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_SPACE:
-            Missile.isStage2 = True
-            MoonLighter_FrameWork.change_state(stage2)
+
         else:
             players.handle_event(event)
 
@@ -116,8 +118,7 @@ def handle_events():
 def update():
     for MoonLighter_object in MoonLighter_world.all_objects():
         MoonLighter_object.update()
-    if Hp.count == 3:
-        MoonLighter_FrameWork.quit()
+
 
     for ball in eBalls:
         if collide(players, ball):
@@ -145,7 +146,8 @@ def update():
             MoonLighter_world.remove_object(ball4)
             Hp.count += 1
             print("충돌")
-
+    if Hp.count == 3:
+        MoonLighter_FrameWork.quit()
 
     pass
 

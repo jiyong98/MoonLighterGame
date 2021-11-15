@@ -70,12 +70,12 @@ class Enermy2:
         if Enermy2.image == None:
             Enermy2.image = load_image('enermy1.PNG')
 
+
         if Enermy2.hpimage1 == None:
             Enermy2.hpimage1 = load_image('hp100.png')
 
         if Enermy2.hpimage3 == None:
             Enermy2.hpimage3 = load_image('hp50.png')
-
         self.x, self.y = 900, 300
 
         self.Bx, self.By = self.x, self.y
@@ -91,11 +91,11 @@ class Enermy2:
         self.image.draw(self.x, self.y)
         if Enermy2.hp == 0:
             Enermy2.hpimage1.draw(self.x, self.y + 50)
-        elif Enermy.hp == 1:
+        elif Enermy2.hp == 1:
             Enermy2.hpimage3.draw(self.x, self.y + 50)
 
         # self.font.draw(self.x - 60, self.y + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
-        #draw_rectangle(*self.get_bb())
+
 
     def remove(self):
         Enermy2.run = True
@@ -143,7 +143,7 @@ class Enermy3:
     def draw(self):
         self.image.draw(self.x, self.y)
         if Enermy3.hp == 0:
-            Enermy.hpimage1.draw(self.x, self.y + 50)
+            Enermy3.hpimage1.draw(self.x, self.y + 50)
         elif Enermy3.hp == 1:
             Enermy3.hpimage3.draw(self.x, self.y + 50)
 
