@@ -8,4 +8,5 @@ import start_state
 
 pico2d.open_canvas(WINDOW_WIDTH, WINDOW_HEIGHT)
 MoonLighter_FrameWork.run(start_state)
+
 pico2d.close_canvas()
