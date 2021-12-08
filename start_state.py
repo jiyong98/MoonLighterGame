@@ -9,6 +9,9 @@ image = None
 def enter():
     global image
     image = load_image('Start_Map.png')
+
+    global start
+    start = load_music('start.mp3')
     pass
 
 
@@ -26,11 +29,13 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             MoonLighter_FrameWork.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_SPACE:
+            start.play()
             MoonLighter_FrameWork.change_state(stage1)
     pass
 
 def draw():
     clear_canvas()
+
     image.draw(1280//2, 800//2)
     update_canvas()
     pass

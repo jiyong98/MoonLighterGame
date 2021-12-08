@@ -31,7 +31,7 @@ eBalls2 = []
 enermy2s = None
 missiles = None
 image = None
-
+bgm = None
 
 def collide(a, b):
     # fill here
@@ -48,6 +48,15 @@ def collide(a, b):
 def enter():
     global image
     image = load_image('Stage1.png')
+
+    global stageC
+    stageC = load_music('stageC.mp3')
+    stageC.set_volume(64)
+
+
+    global attack
+    attack = load_music('eballattack.mp3')
+    attack.set_volume(30)
 
     global players
     players = Player()
@@ -104,9 +113,6 @@ def handle_events():
             MoonLighter_FrameWork.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             MoonLighter_FrameWork.quit()
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_SPACE:
-            Missile.isStage2 = True
-            MoonLighter_FrameWork.change_state(stage2)
         else:
             players.handle_event(event)
 
@@ -116,6 +122,10 @@ def handle_events():
 def update():
     for MoonLighter_object in MoonLighter_world.all_objects():
         MoonLighter_object.update()
+    if Player.x >= 1200:
+        stageC.play()
+        Missile.isStage2 = True
+        MoonLighter_FrameWork.change_state(stage2)
     if Hp.count == 3:
         MoonLighter_FrameWork.quit()
 
@@ -124,7 +134,7 @@ def update():
             eBalls.remove(ball)
             MoonLighter_world.remove_object(ball)
             Hp.count += 1
-
+            attack.play()
             print("충돌")
 
     for ball2 in eBalls2:
@@ -132,18 +142,21 @@ def update():
             eBalls2.remove(ball2)
             MoonLighter_world.remove_object(ball2)
             Hp.count += 1
+            attack.play()
             print("충돌")
     for ball3 in eBalls3:
         if collide(players, ball3):
             eBalls3.remove(ball3)
             MoonLighter_world.remove_object(ball3)
             Hp.count += 1
+            attack.play()
             print("충돌")
     for ball4 in eBalls4:
         if collide(players, ball4):
             eBalls4.remove(ball4)
             MoonLighter_world.remove_object(ball4)
             Hp.count += 1
+            attack.play()
             print("충돌")
 
 
@@ -152,6 +165,7 @@ def update():
 
 def draw():
     clear_canvas()
+
     image.draw(1280//2, 400)
     for MoonLighter_object in MoonLighter_world.all_objects():
         MoonLighter_object.draw()

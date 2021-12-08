@@ -32,7 +32,7 @@ eBalls2 = []
 enermy2s = None
 missiles = None
 image = None
-
+clear = None
 
 def collide(a, b):
     # fill here
@@ -49,6 +49,17 @@ def collide(a, b):
 def enter():
     global image
     image = load_image('Stage1.png')
+
+    global clear
+    clear = load_image('stageClear.png')
+
+    global attack
+    attack = load_music('eballattack.mp3')
+    attack.set_volume(30)
+
+    global die
+    die = load_music('die.mp3')
+    die.set_volume(64)
 
     global boss
     boss = Boss()
@@ -125,7 +136,7 @@ def update():
             eBalls.remove(ball)
             MoonLighter_world.remove_object(ball)
             Hp.count += 1
-
+            attack.play()
             print("충돌")
 
     for ball2 in eBalls2:
@@ -133,11 +144,13 @@ def update():
             eBalls2.remove(ball2)
             MoonLighter_world.remove_object(ball2)
             Hp.count += 1
+            attack.play()
             print("충돌")
     for ball3 in eBalls3:
         if collide(players, ball3):
             eBalls3.remove(ball3)
             MoonLighter_world.remove_object(ball3)
+            attack.play()
             Hp.count += 1
             print("충돌")
     for ball4 in eBalls4:
@@ -145,16 +158,24 @@ def update():
             eBalls4.remove(ball4)
             MoonLighter_world.remove_object(ball4)
             Hp.count += 1
+            attack.play()
             print("충돌")
     if Hp.count == 3:
-        MoonLighter_FrameWork.quit()
+        die.play()
+        #MoonLighter_FrameWork.quit()
+
 
     pass
+
 
 
 def draw():
     clear_canvas()
     image.draw(1280//2, 400)
+    global time
+    if Boss.Hp >= 4 and Player.x >= 1200:
+        clear.draw(1280 // 2, 400)
+
     for MoonLighter_object in MoonLighter_world.all_objects():
         MoonLighter_object.draw()
     update_canvas()

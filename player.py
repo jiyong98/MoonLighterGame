@@ -38,6 +38,7 @@ key_event_table = {
 
 
 class Player:
+    x = 0
     Left = False
     Right = False
     Up = False
@@ -54,6 +55,13 @@ class Player:
     def __init__(self):
         self.x, self.y = 90, 800//2
         self.image = load_image('charecter_anim.png')
+        self.gunS = load_music('gun.mp3')
+
+        self.die = load_music('die.mp3')
+        self.die.set_volume(64)
+        self.gunS.set_volume(32)
+
+        #self.bgm.repeat_play()
         self.dx, self.dy = 0, 0
         self.frame = 0
         self.dir = 1
@@ -84,7 +92,9 @@ class Player:
         MoonLighter_world.add_object(missile, 1)
 
     def update(self):
+
         self.x += self.dx
+        Player.x = self.x
         self.y += self.dy
         self.frame = (self.frame + 1) % 4
         #self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * MoonLighter_FrameWork.frame_time) % 4
@@ -95,6 +105,7 @@ class Player:
             MoonLighter_world.remove_object(self)
 
     def draw(self):
+        #self.bgm.play()
         self.image.clip_draw(100, self.radi * 1, 100, 100, self.x, self.y)
         if Player.Right:
             self.image.clip_draw(self.frame * 100, 300, 100, 100, self.x, self.y)
@@ -138,6 +149,7 @@ class Player:
                 Player.Down = True
             elif event.key == SDLK_a:
                 self.fire_Missile()
+                self.gunS.play()
             elif event.key == SDLK_ESCAPE:
                 MoonLighter_FrameWork.quit()
         elif event.type == SDL_KEYUP:

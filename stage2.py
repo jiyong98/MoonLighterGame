@@ -47,6 +47,10 @@ def enter():
     global image
     image = load_image('Stage2.png')
 
+    global stageC
+    stageC = load_music('stageC.mp3')
+    stageC.set_volume(64)
+
     global players
     players = Player()
     MoonLighter_world.add_object(players, 1)
@@ -123,7 +127,8 @@ def update():
     for MoonLighter_object in MoonLighter_world.all_objects():
         MoonLighter_object.update()
 
-    if Missile.Total == 12:
+    if Missile.Total >= 11 and Player.x >= 1200:
+        stageC.play()
         Missile.isStage2 = False
         Missile.isStage3 = True
         MoonLighter_FrameWork.change_state(stage3)

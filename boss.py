@@ -55,6 +55,7 @@ class Boss:
         Boss.Hp += 1
 
     def update(self):
+        self.x -= 0.2
         if Boss.run:
             MoonLighter_world.remove_object(self)
         pass
