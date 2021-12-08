@@ -53,6 +53,11 @@ def enter():
     stageC = load_music('stageC.mp3')
     stageC.set_volume(64)
 
+    global stage
+    stage = load_music('sound.mp3')
+    stage.set_volume(40)
+    stage.play()
+    stage.bgm.repeat_play()
 
     global attack
     attack = load_music('eballattack.mp3')
