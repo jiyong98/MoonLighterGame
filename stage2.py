@@ -115,8 +115,7 @@ def handle_events():
             MoonLighter_FrameWork.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             MoonLighter_FrameWork.quit()
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_SPACE:
-            MoonLighter_FrameWork.change_state(stage3)
+
         else:
             players.handle_event(event)
 

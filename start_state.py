@@ -10,6 +10,12 @@ def enter():
     global image
     image = load_image('Start_Map.png')
 
+    global cl
+    cl = load_music('stageM.mp3')
+    cl.set_volume(32)
+
+    cl.play(1)
+
     global start
     start = load_music('start.mp3')
     pass

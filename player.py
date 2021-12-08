@@ -80,6 +80,9 @@ class Player:
         if Player.hpimage4 == None:
             Player.hpimage4 = load_image('hp25.png')
 
+
+
+
     def get_bb(self):
         # fill here
         return self.x - 25, self.y - 25, self.x + 25, self.y + 25

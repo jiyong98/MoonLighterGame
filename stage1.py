@@ -18,7 +18,7 @@ WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 800
 
 name = "stage1"
-
+import gameover
 
 boss = None
 hp = None
@@ -46,6 +46,11 @@ def collide(a, b):
 
     return True
 def enter():
+    global cl
+    cl = load_music('stageM.mp3')
+    cl.set_volume(32)
+    cl.repeat_play()
+    #cl.play(1)
     global image
     image = load_image('Stage1.png')
 
@@ -53,11 +58,9 @@ def enter():
     stageC = load_music('stageC.mp3')
     stageC.set_volume(64)
 
-    global stage
-    stage = load_music('sound.mp3')
-    stage.set_volume(40)
-    stage.play()
-    stage.bgm.repeat_play()
+    global die
+    die = load_music('die.mp3')
+    die.set_volume(64)
 
     global attack
     attack = load_music('eballattack.mp3')
@@ -131,8 +134,9 @@ def update():
         stageC.play()
         Missile.isStage2 = True
         MoonLighter_FrameWork.change_state(stage2)
-    if Hp.count == 3:
-        MoonLighter_FrameWork.quit()
+    if Hp.count >= 3:
+        #die.play()
+        MoonLighter_FrameWork.change_state(gameover)
 
     for ball in eBalls:
         if collide(players, ball):

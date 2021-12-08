@@ -25,6 +25,7 @@ def collide(a, b):
 
 class Missile:
     image = None
+
     isEnermy1 = True
     isEnermy2 = True
     isEnermy3 = True
@@ -45,10 +46,14 @@ class Missile:
     isStage3 = False
     isRad = True
     L, R, U, D = 0, 1, 0, 0
+    efx = 0
+    efy = 0
     rad = 0
     def __init__(self, x = 0, y = 0, velocity = 1):
         if Missile.image == None:
             Missile.image = load_image('eBall.png')
+
+
         self.x, self.y, self.velocity = x, y, velocity
         self.font = load_font('ENCR10B.TTF', 16)
         global boss
@@ -96,6 +101,7 @@ class Missile:
                 if collide(self, slames):
                     Missile.count = Missile.count + 1
                     Enermy.col(slames)
+
                     MoonLighter_world.remove_object(self)
                 if Missile.count >= 2:
                     Enermy.remove(slames)

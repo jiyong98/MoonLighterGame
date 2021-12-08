@@ -9,12 +9,18 @@ class Enermy:
     image = None
     hpimage1 = None
     hpimage3 = None
+    efimage = None
     hp = 0
     x = 0
+    y = 0
     run = False
+    ef = False
     def __init__(self):
         if Enermy.image == None:
             Enermy.image = load_image('slameAni.PNG')
+
+        if Enermy.efimage == None:
+            Enermy.efimage = load_image('effect.png')
 
         if Enermy.hpimage1 == None:
             Enermy.hpimage1 = load_image('hp100.png')
@@ -44,6 +50,7 @@ class Enermy:
         elif Enermy.hp == 1:
             Enermy.hpimage3.draw(self.x, self.y + 50)
 
+
         #self.font.draw(self.x - 60, self.y + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
         #draw_rectangle(*self.get_bb())
 
@@ -57,6 +64,7 @@ class Enermy:
         self.y += self.s
         self.x -= self.Mx
         Enermy.x = self.x
+        Enermy.y = self.y
         if self.y >= 510:
             self.s *= -1
         if self.y <= 490:

@@ -9,15 +9,15 @@ from player import Player
 
 from eBall import Eball, Eball2, Eball3, Eball4
 from boss import Boss
-#from missile import Missile
+from missile import Missile
 from hp import Hp
-
+import gameover
 from enermy1 import Enermy2
 import MoonLighter_world
-import stage2
+import start_state
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 800
-
+import clear
 name = "stage3"
 
 
@@ -32,7 +32,7 @@ eBalls2 = []
 enermy2s = None
 missiles = None
 image = None
-clear = None
+clearc = None
 
 def collide(a, b):
     # fill here
@@ -47,11 +47,12 @@ def collide(a, b):
 
     return True
 def enter():
+
     global image
     image = load_image('Stage1.png')
 
-    global clear
-    clear = load_image('stageClear.png')
+    global clearc
+    clearc = load_image('stageClear.png')
 
     global attack
     attack = load_music('eballattack.mp3')
@@ -60,7 +61,9 @@ def enter():
     global die
     die = load_music('die.mp3')
     die.set_volume(64)
-
+    global stageC
+    stageC = load_music('stageC.mp3')
+    stageC.set_volume(64)
     global boss
     boss = Boss()
     MoonLighter_world.add_object(boss, 1)
@@ -97,6 +100,9 @@ def enter():
     enermy2s = Enermy2()
     MoonLighter_world.add_object(enermy2s, 1)
 
+    global missiles
+    missiles = Missile()
+    MoonLighter_world.add_object(missiles, 1)
     pass
 
 def exit():
@@ -119,17 +125,15 @@ def handle_events():
             MoonLighter_FrameWork.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             MoonLighter_FrameWork.quit()
-
         else:
             players.handle_event(event)
-
+        #stageC.play()
     pass
 
 
 def update():
     for MoonLighter_object in MoonLighter_world.all_objects():
         MoonLighter_object.update()
-
 
     for ball in eBalls:
         if collide(players, ball):
@@ -160,9 +164,11 @@ def update():
             Hp.count += 1
             attack.play()
             print("충돌")
-    if Hp.count == 3:
+    if Hp.count >= 3:
         die.play()
-        #MoonLighter_FrameWork.quit()
+        MoonLighter_FrameWork.change_state(gameover)
+
+
 
 
     pass
@@ -173,8 +179,12 @@ def draw():
     clear_canvas()
     image.draw(1280//2, 400)
     global time
+    #if Boss.Hp >= 4 and Player.x >= 1200:
+        #clearc.draw(1280 // 2, 400)
+
     if Boss.Hp >= 4 and Player.x >= 1200:
-        clear.draw(1280 // 2, 400)
+        stageC.play()
+        MoonLighter_FrameWork.change_state(clear)
 
     for MoonLighter_object in MoonLighter_world.all_objects():
         MoonLighter_object.draw()
